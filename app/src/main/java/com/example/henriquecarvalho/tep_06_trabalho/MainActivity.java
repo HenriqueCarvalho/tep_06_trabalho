@@ -14,14 +14,12 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Minhas Viagens test");
-        actionBar.setLogo(R.drawable.ic_action_share);
-        //actionBar.setHomeAsUpIndicator(R.drawable.ic_action_share);
-        //actionBar.setDisplayHomeAsUpEnabled(true);
 
-        /*ActionBar actionBar = getActionBar();
-        actionBar.setTitle("Minhas Viagens");
-        actionBar.setLogo(R.drawable.ic_action_share);
-        actionBar.setDisplayShowHomeEnabled(true);*/
+        // No material design setLog não funciona
+        //actionBar.setLogo(R.drawable.ic_action_share);
+
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_share);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
    @Override
