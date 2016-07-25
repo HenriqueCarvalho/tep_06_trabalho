@@ -12,7 +12,7 @@
         <!-- The main/home activity (it has no parent activity) -->
         <activity
             android:name=".MainActivity"
-            android:label="First fdp view">
+            android:label="MyTravel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,8 +23,22 @@
         <!-- A child of the main activity -->
         <activity
             android:name=".NewTravelActivity"
-            android:label="Second fdp view"
-            android:parentActivityName="com.example.henriquecarvalho.tep_06_trabalho.MainActivity" >
+            android:label="Nova viagem"
+            android:parentActivityName=".MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.henriquecarvalho.tep_06_trabalho.MainActivity" />
+        </activity>
+
+
+
+        <!-- A child of the main activity -->
+        <activity
+            android:name=".MyTravelsActivity"
+            android:label="Minha viagens"
+            android:parentActivityName=".MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data

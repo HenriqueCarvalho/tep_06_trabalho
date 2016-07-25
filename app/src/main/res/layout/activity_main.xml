@@ -10,12 +10,12 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:maxHeight="32dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nova viagem"
-        android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:padding="0dp"
@@ -24,24 +24,26 @@
         android:onClick="newTravelTextViewClicked" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Novo gasto"
-        android:id="@+id/textView2"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
-        android:drawableLeft="@drawable/ic_action_share"/>
+        android:drawableLeft="@drawable/ic_action_share"
+        android:onClick="myTravelsActivityTextViewClicked" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text=" Minhas viagens"
-        android:id="@+id/textView3"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
-        android:drawableLeft="@drawable/ic_action_share"/>
+        android:drawableLeft="@drawable/ic_action_share"
+        android:onClick="myTravelsActivityTextViewClicked" />
 </RelativeLayout>
