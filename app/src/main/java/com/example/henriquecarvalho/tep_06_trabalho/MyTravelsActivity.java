@@ -5,10 +5,18 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class MyTravelsActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MyTravelsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private static final String TAG = NewTravelActivity.class.getSimpleName();
+
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +25,17 @@ public class MyTravelsActivity extends AppCompatActivity {
 
        // ActionBar actionBar = getSupportActionBar();
        // actionBar.setDisplayHomeAsUpEnabled(true);
+
+        // ListView
+        listView = (ListView) findViewById(R.id.listview);
+        List<Travel> travels = Travel.getTravels();
+
+        listView.setAdapter(new TravelAdapter(this, travels));
+        listView.setOnItemClickListener(this);
+    }
+    public void onItemClick(AdapterView<?> parent, View view, int idx, long id) {
+        Travel t = (Travel) parent.getAdapter().getItem(idx);
+        Toast.makeText(this, "Travel: " + t.getLocation(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -35,4 +54,6 @@ public class MyTravelsActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
