@@ -1,9 +1,10 @@
 package com.example.henriquecarvalho.tep_06_trabalho;
 
+import android.content.Intent;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class MyTravelsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private static final String TAG = NewTravelActivity.class.getSimpleName();
+    private static final String TAG = MyTravelsActivity.class.getSimpleName();
 
     private ListView listView;
 
@@ -33,12 +34,20 @@ public class MyTravelsActivity extends AppCompatActivity implements AdapterView.
         listView.setAdapter(new TravelAdapter(this, travels));
         listView.setOnItemClickListener(this);
     }
-    public void onItemClick(AdapterView<?> parent, View view, int idx, long id) {
-        Travel t = (Travel) parent.getAdapter().getItem(idx);
-        Toast.makeText(this, "Travel: " + t.getLocation(), Toast.LENGTH_SHORT).show();
+
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Travel travel = (Travel) parent.getAdapter().getItem(position);
+
+        //Toast.makeText(this, "Travel: " + travel.getLocation(), Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onItemClick()"+position);
+
+
+        Intent intent = new Intent(this, MyCostsActivity.class);
+        intent.putExtra("position", position);
+        //startActivityForResult(intent, 1);
+        startActivity(intent);
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -54,6 +63,5 @@ public class MyTravelsActivity extends AppCompatActivity implements AdapterView.
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }

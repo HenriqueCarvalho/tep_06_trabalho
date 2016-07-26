@@ -32,8 +32,6 @@
                 android:value="com.example.henriquecarvalho.tep_06_trabalho.MainActivity" />
         </activity>
 
-
-
         <!-- A child of the main activity -->
         <activity
             android:name=".MyTravelsActivity"
@@ -45,6 +43,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.henriquecarvalho.tep_06_trabalho.MainActivity" />
         </activity>
+
+        <!-- A child of the main activity -->
+        <activity
+            android:name=".NewCostActivity"
+            android:label="Novo gasto"
+            android:parentActivityName=".MainActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.henriquecarvalho.tep_06_trabalho.MainActivity" />
+        </activity>
+        <activity android:name=".MyCostsActivity"></activity>
     </application>
 
 </manifest>

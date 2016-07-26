@@ -53,7 +53,7 @@ public class TravelAdapter extends BaseAdapter {
 
         icon.setImageResource(R.drawable.ic_action_share); // colocar o icone do tipo de viagem aqui
         location.setText(travel.getLocation());
-        date.setText(travel.getDate().toString());
+        date.setText("10/10/2016");
         total.setText("R$ 100,00"); // Somar todos valores dos custos e colocar aqui
 
         // Retorna a view desta viagem

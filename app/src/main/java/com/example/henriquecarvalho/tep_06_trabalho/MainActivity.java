@@ -36,6 +36,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void newCostTextViewClicked(View view){
+        Intent intent = new Intent(this, NewCostActivity.class);
+        startActivity(intent);
+    }
+
     public void myTravelsActivityTextViewClicked(View view){
         Intent intent = new Intent(this, MyTravelsActivity.class);
         startActivity(intent);

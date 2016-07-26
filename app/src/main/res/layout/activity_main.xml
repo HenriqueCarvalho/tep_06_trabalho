@@ -33,7 +33,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
         android:drawableLeft="@drawable/ic_action_share"
-        android:onClick="myTravelsActivityTextViewClicked" />
+        android:onClick="newCostTextViewClicked" />
 
     <TextView
         android:id="@+id/textView3"
