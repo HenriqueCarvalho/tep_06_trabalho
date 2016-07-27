@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         //actionBar.setTitle("Minhas Viagens test");
 
         // No material design setLog não funciona
-        //actionBar.setLogo(R.drawable.ic_action_share);
+        actionBar.setLogo(R.drawable.ic_action_share);
 
         //actionBar.setHomeAsUpIndicator(R.drawable.logo);
         //actionBar.setDisplayHomeAsUpEnabled(true);

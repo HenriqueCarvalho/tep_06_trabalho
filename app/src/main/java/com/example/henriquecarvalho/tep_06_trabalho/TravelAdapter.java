@@ -66,7 +66,7 @@ public class TravelAdapter extends BaseAdapter implements Filterable {
 
         location.setText(travel.getLocation());
         date.setText(travel.getDate());
-        total.setText(Double.toString(travel.getTotal())); // Somar todos valores dos custos e colocar aqui
+        total.setText("R$"+Double.toString(travel.getTotal())); // Somar todos valores dos custos e colocar aqui
 
         // Retorna a view desta viagem
         return view;
@@ -102,16 +102,15 @@ public class TravelAdapter extends BaseAdapter implements Filterable {
                 results.count = oTravels.size();
             } else {
                 // We perform filtering operation
-                List<Travel> nPlanetList = new ArrayList<Travel>();
+                List<Travel> nTravelList = new ArrayList<Travel>();
 
                 for (Travel p : travels) {
                     if (p.getLocation().toUpperCase().startsWith(constraint.toString().toUpperCase()))
-                        nPlanetList.add(p);
+                        nTravelList.add(p);
                 }
 
-                results.values = nPlanetList;
-                results.count = nPlanetList.size();
-
+                results.values = nTravelList;
+                results.count = nTravelList.size();
             }
             return results;
         }

@@ -92,7 +92,7 @@ public class CostAdapter extends BaseAdapter {
         //icon.setImageResource(R.drawable.ic_action_share); // colocar o icone do tipo de viagem aqui
         typeOfCost.setText(cost.getType().toString());
         date.setText(cost.getDate());
-        price.setText(Double.toString(cost.getPrice()));
+        price.setText("R$"+Double.toString(cost.getPrice()));
 
         // Retorna a view deste gasto
         return view;

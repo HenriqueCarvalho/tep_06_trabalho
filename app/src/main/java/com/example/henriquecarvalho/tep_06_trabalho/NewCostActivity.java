@@ -74,12 +74,10 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
         costSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                // faz algo...
                 Log.d(TAG, "onItemSelected()"+parent.getItemAtPosition(pos));
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // faz algo
                 Log.d(TAG, "onNothingSelected()");
             }
         });
