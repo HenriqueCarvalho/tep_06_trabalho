@@ -50,6 +50,10 @@ public class CostAdapter extends BaseAdapter {
             costs.remove(seletedItens.get(i));
         }
 
+        // Clear the selected itens
+        seletedItens.clear();
+
+        // Update the UI
         notifyDataSetChanged();
     }
 
