@@ -55,7 +55,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.henriquecarvalho.tep_06_trabalho.MainActivity" />
         </activity>
-        <activity android:name=".MyCostsActivity"></activity>
+
+        <!-- A child of the main activity -->
+        <activity
+            android:name=".MyCostsActivity"
+            android:label="Meus gastos"
+            android:parentActivityName=".MyTravelsActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.henriquecarvalho.tep_06_trabalho.MyTravelsActivity" />
+        </activity>
     </application>
 
 </manifest>
