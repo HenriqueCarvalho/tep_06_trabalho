@@ -70,7 +70,6 @@ public class NewTravelActivity extends AppCompatActivity implements DatePickerDi
                 return true;
             case R.id.action_done:
                 saveData();
-                toast("A viagem foi salva.");
                 return true;
         }
 
@@ -128,14 +127,17 @@ public class NewTravelActivity extends AppCompatActivity implements DatePickerDi
     }
 
     private void saveData() {
-
         String location = locationEditText.getText().toString();
-        Trip trip = Trip.BUSINNESS;
+        Trip trip = Trip.LEISURE;
         String date = datePickertxtView.getText().toString();
+        if(location.isEmpty() || date.isEmpty()) {
+            toast("Nome está vazio!");
+        } else {
+            Travel travel = new Travel(location, trip, date);
+            travels.add(travel);
+            toast("A viagem foi salva.");
+        }
 
-        Travel travel = new Travel(location,trip,date);
-
-        travels.add(travel);
     }
 
 }

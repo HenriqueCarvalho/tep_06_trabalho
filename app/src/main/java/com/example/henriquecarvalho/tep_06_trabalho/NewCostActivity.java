@@ -106,7 +106,6 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
                 return true;
             case R.id.action_done:
                 saveData();
-                toast("O gasto foi salvo.");
                 return true;
         }
 
@@ -161,9 +160,13 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
             price = Double.parseDouble(strprice);
         }
 
-        Cost cost = new Cost(c,date,price);
-
-        travels.get(pos).getCosts().add(cost);
+        if(price == 0.0 ) {
+            toast("Campo preço está vazio!");
+        } else {
+            Cost cost = new Cost(c, date, price);
+            travels.get(pos).getCosts().add(cost);
+            toast("O gasto foi salvo.");
+        }
 
         Log.d(TAG, "saveData() travelSpinner: " + travelSpinner.getSelectedItem().toString());
         Log.d(TAG, "         travelPosition: " + travelSpinner.getSelectedItemPosition());
