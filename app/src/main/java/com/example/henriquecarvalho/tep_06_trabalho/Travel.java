@@ -11,7 +11,7 @@ public class Travel {
     private String location;
     private Trip type;
     private String date;
-    private List<Cost> cots;
+    private List<Cost> costs;
 
 
     public Travel(String location, Trip typeOftravel, String date) {
@@ -24,7 +24,7 @@ public class Travel {
         this.location = location;
         this.type = typeOftravel;
         this.date = date;
-        this.cots = costs;
+        this.costs = costs;
     }
 
     public String getLocation() {
@@ -51,12 +51,12 @@ public class Travel {
         this.date = date;
     }
 
-    public List<Cost> getCots() {
-        return cots;
+    public List<Cost> getCosts() {
+        return costs;
     }
 
-    public void setCots(List<Cost> cots) {
-        this.cots = cots;
+    public void getCosts(List<Cost> costs) {
+        this.costs = costs;
     }
 
     public static List<Travel> getTravels() {
@@ -81,7 +81,6 @@ public class Travel {
         List<Cost> costs = new ArrayList<Cost>();
         costs.add(new Cost(TypeCost.FOOD, "10-12-2016", 80.00 ));
         costs.add(new Cost(TypeCost.HOST, "10-12-2016", 150.00 ));
-        costs.add(new Cost(TypeCost.TRANSPORT, "10-12-2016", 120.00 ));
         costs.add(new Cost(TypeCost.OTHERS, "10-12-2016", 200.00 ));
 
         travels.add(new Travel("Vancouver", Trip.BUSINNESS, "10-12-2016", costs));

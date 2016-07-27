@@ -5,21 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by henriquecarvalho on 2016-07-25.
  */
-public class TravelAdapter extends BaseAdapter {
+public class TravelAdapter extends BaseAdapter implements Filterable {
     private final Context context;
-    private final List<Travel> travels;
+    private List<Travel> travels;
+    private Filter travelFilter;
+    private List<Travel> oTravels;
 
     public TravelAdapter(Context context, List<Travel> travels) {
         this.context = context;
         this.travels = travels;
+        this.oTravels = travels;
     }
 
     @Override
@@ -59,4 +65,64 @@ public class TravelAdapter extends BaseAdapter {
         // Retorna a view desta viagem
         return view;
     }
+
+    public void resetData() {
+        travels = oTravels;
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (travelFilter == null)
+            travelFilter = new TravelFilter();
+
+        return travelFilter;
+    }
+
+    /* for more information about Filter implementation:
+     * https://github.com/survivingwithandroid/Surviving-with-android/blob/master/
+     * ListView_Filter_Tutorial/src/com/survivingwithandroid/listview/SimpleList/PlanetAdapter.java
+     */
+
+    public class TravelFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            // We implement here the filter logic
+            if (constraint == null || constraint.length() == 0) {
+
+                // No filter implemented we return all the list
+                results.values = oTravels;
+                results.count = oTravels.size();
+            } else {
+                // We perform filtering operation
+                List<Travel> nPlanetList = new ArrayList<Travel>();
+
+                for (Travel p : travels) {
+                    if (p.getLocation().toUpperCase().startsWith(constraint.toString().toUpperCase()))
+                        nPlanetList.add(p);
+                }
+
+                results.values = nPlanetList;
+                results.count = nPlanetList.size();
+
+            }
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint,Filter.FilterResults results) {
+            // Now we have to inform the adapter about the new list filtered
+            if (results.count == 0)
+                notifyDataSetInvalidated();
+            else {
+                travels = (List<Travel>) results.values;
+                notifyDataSetChanged();
+            }
+        }
+
+    }
+
+
+
 }
