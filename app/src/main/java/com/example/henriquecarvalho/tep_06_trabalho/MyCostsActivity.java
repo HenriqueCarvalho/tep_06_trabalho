@@ -37,8 +37,11 @@ public class MyCostsActivity extends AppCompatActivity {
             // If you want to get string
             //String someVariable = extras.getString("someVariable");
 
-            List<Travel> travels = Travel.getTravels();
+            //List<Travel> travels = Travel.getTravels();
+            MySingleton tmp = MySingleton.getInstance();
+            List<Travel> travels = tmp.travels;
             List<Cost> costs = travels.get(position).getCosts();
+
 
             Log.d(TAG, "onCreate()"+position);
 

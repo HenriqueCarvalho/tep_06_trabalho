@@ -17,35 +17,41 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class NewCostActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private static final String TAG = NewCostActivity.class.getSimpleName();
-    private String[] planetas = new String[]{"Mercúrio", "Vênus", "Terra", "Marte", "Júpiter","Saturno", "Urano",
-            "Netuno", "Plutão"};
-    private Spinner travelSpinner;
-    private Spinner costSpinner;
+    private List<Travel> travels;
+    private Cost cost;
 
-    //UI References
+    // UI References
     private TextView dateTextView;
     private SimpleDateFormat dateFormatter;
     private EditText valueEditText;
+    private Spinner travelSpinner;
+    private Spinner costSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_cost);
 
+        MySingleton tmp = MySingleton.getInstance();
+        travels = tmp.travels;
+
         travelSpinner = (Spinner) findViewById(R.id.travelSpinner);
         costSpinner = (Spinner) findViewById(R.id.costSpinner);
         dateTextView = (TextView) findViewById(R.id.dateTextView);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        setDateTextView();
         valueEditText = (EditText) findViewById(R.id.valueEditText);
 
         ArrayAdapter<String> travelAdaptador =
-                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, planetas);
+                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, getLocations());
 
         travelSpinner.setAdapter(travelAdaptador);
         travelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -58,12 +64,11 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
             public void onNothingSelected(AdapterView<?> parent) {
                 // faz algo
                 Log.d(TAG, "onNothingSelected()");
-
             }
         });
 
         ArrayAdapter<String> costAdaptador =
-                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, planetas);
+                new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, getTypes());
 
         costSpinner.setAdapter(costAdaptador);
         costSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -78,7 +83,6 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
                 Log.d(TAG, "onNothingSelected()");
             }
         });
-
     }
 
     @Override
@@ -101,7 +105,8 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_done:
-                toast("O gasto foi adicionado");
+                saveData();
+                toast("O gasto foi salvo.");
                 return true;
         }
 
@@ -110,6 +115,66 @@ public class NewCostActivity extends AppCompatActivity implements DatePickerDial
 
     private void toast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public List<String> getLocations() {
+        List<String> locations = new ArrayList<String>();
+
+        for(Travel t: travels) {
+            locations.add(t.getLocation());
+        }
+
+        return locations;
+    }
+
+    public static String[] getTypes() {
+        TypeCost[] types = TypeCost.values();
+        String[] names = new String[types.length];
+
+        for (int i = 0; i < types.length; i++) {
+            names[i] = types[i].toString();
+        }
+
+        return names;
+    }
+
+    private void setDateTextView() {
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        dateTextView.setText(dateFormatter.format(c.getTime()));
+    }
+
+    private void saveData() {
+        String costValue = costSpinner.getSelectedItem().toString();
+        int pos = travelSpinner.getSelectedItemPosition();
+        TypeCost c = TypeCost.fromString(costValue);
+        String date = dateTextView.getText().toString();
+        double price = 0.0;
+        String strprice = valueEditText.getText().toString();
+
+        if(strprice.isEmpty()) {
+            price = 0.0;
+        } else {
+            price = Double.parseDouble(strprice);
+        }
+
+        Cost cost = new Cost(c,date,price);
+
+        travels.get(pos).getCosts().add(cost);
+
+        Log.d(TAG, "saveData() travelSpinner: " + travelSpinner.getSelectedItem().toString());
+        Log.d(TAG, "         travelPosition: " + travelSpinner.getSelectedItemPosition());
+        Log.d(TAG, "                     c: " + c.hashCode() + "/" + c.name() + "/" + c.toString());
+        Log.d(TAG, "             costSpinner: " + costValue);
+        Log.d(TAG, "            price: " + price);
+        Log.d(TAG, "            dateTextView: " + date);
+
+        for (Cost test: travels.get(pos).getCosts()) {
+            Log.d(TAG, "costs: " + test.getType());
+        }
     }
 
     // handle the date selected

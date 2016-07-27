@@ -4,7 +4,7 @@
     tools:context=".NewTravelActivity">
 
     <item android:id="@+id/action_done"
-        android:icon="@android:drawable/ic_menu_share"
+        android:icon="@android:drawable/ic_menu_save"
         android:title="done"
         android:orderInCategory="100"
         app:showAsAction="always"/>

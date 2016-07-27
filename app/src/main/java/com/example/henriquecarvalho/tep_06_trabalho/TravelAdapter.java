@@ -57,10 +57,16 @@ public class TravelAdapter extends BaseAdapter implements Filterable {
         // Atualiza os valores das views
         Travel travel = travels.get(position);
 
-        icon.setImageResource(R.drawable.ic_action_share); // colocar o icone do tipo de viagem aqui
+        if(travel.getType() == Trip.BUSINNESS) {
+            icon.setImageResource(R.drawable.negocios);
+
+        } else {
+            icon.setImageResource(R.drawable.lazer);
+        }
+
         location.setText(travel.getLocation());
-        date.setText("10/10/2016");
-        total.setText("R$ 100,00"); // Somar todos valores dos custos e colocar aqui
+        date.setText(travel.getDate());
+        total.setText(Double.toString(travel.getTotal())); // Somar todos valores dos custos e colocar aqui
 
         // Retorna a view desta viagem
         return view;

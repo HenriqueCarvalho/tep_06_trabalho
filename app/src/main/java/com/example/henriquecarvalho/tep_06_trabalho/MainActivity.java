@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +23,12 @@ public class MainActivity extends AppCompatActivity {
         // No material design setLog não funciona
         //actionBar.setLogo(R.drawable.ic_action_share);
 
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_share);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setHomeAsUpIndicator(R.drawable.logo);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+
+        MySingleton tmp = MySingleton.getInstance();
+
+        Log.d(TAG, "onCreate()");
     }
 
    @Override

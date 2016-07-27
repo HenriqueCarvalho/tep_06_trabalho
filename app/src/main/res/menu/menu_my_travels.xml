@@ -7,4 +7,10 @@
         app:showAsAction="always|collapseActionView"
         android:icon="@android:drawable/ic_menu_search"
         android:title="Search" />
+    <item
+        android:id="@+id/action_share"
+        android:actionProviderClass="android.widget.ShareActionProvider"
+        app:showAsAction="always|collapseActionView"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="Share" />
 </menu>

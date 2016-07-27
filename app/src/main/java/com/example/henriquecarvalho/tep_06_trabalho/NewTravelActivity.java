@@ -10,19 +10,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class NewTravelActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private static final String TAG = NewTravelActivity.class.getSimpleName();
+    private List<Travel> travels;
 
     //UI References
+    private EditText locationEditText;
     private TextView datePickertxtView;
     private SimpleDateFormat dateFormatter;
 
@@ -34,8 +38,15 @@ public class NewTravelActivity extends AppCompatActivity implements DatePickerDi
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        // Singleton
+        MySingleton tmp = MySingleton.getInstance();
+        travels = tmp.travels;
+
+        // UI
+        locationEditText = (EditText) findViewById(R.id.locationEditText) ;
         datePickertxtView = (TextView) findViewById(R.id.datePickerTextView);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        setDatePickertxtView();
     }
 
     @Override
@@ -58,7 +69,8 @@ public class NewTravelActivity extends AppCompatActivity implements DatePickerDi
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_done:
-                toast("A viagem foi salva");
+                saveData();
+                toast("A viagem foi salva.");
                 return true;
         }
 
@@ -85,6 +97,16 @@ public class NewTravelActivity extends AppCompatActivity implements DatePickerDi
         }
     }
 
+
+    private void setDatePickertxtView() {
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int day = c.get(Calendar.DAY_OF_MONTH);
+
+        datePickertxtView.setText(dateFormatter.format(c.getTime()));
+    }
+
     // handle the date selected
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -103,6 +125,17 @@ public class NewTravelActivity extends AppCompatActivity implements DatePickerDi
     public void showDatePickerDialog(View v) {
         DatePickerFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    private void saveData() {
+
+        String location = locationEditText.getText().toString();
+        Trip trip = Trip.BUSINNESS;
+        String date = datePickertxtView.getText().toString();
+
+        Travel travel = new Travel(location,trip,date);
+
+        travels.add(travel);
     }
 
 }

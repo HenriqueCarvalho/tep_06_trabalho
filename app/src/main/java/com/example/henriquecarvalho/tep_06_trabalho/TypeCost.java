@@ -22,4 +22,15 @@ public enum TypeCost {
     public String toString() {
         return this.name;
     }
+
+    public static TypeCost fromString(String text) {
+        if (text != null) {
+            for (TypeCost b : TypeCost.values()) {
+                if (text.equalsIgnoreCase(b.name)) {
+                    return b;
+                }
+            }
+        }
+        return null;
+    }
 }

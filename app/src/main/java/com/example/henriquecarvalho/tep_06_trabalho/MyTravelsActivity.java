@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class MyTravelsActivity extends AppCompatActivity implements AdapterView.
 
     private ListView listView;
     private TravelAdapter adapter;
+    private List<Travel> travels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,8 @@ public class MyTravelsActivity extends AppCompatActivity implements AdapterView.
 
         // ListView
         listView = (ListView) findViewById(R.id.listview);
-        List<Travel> travels = Travel.getTravels();
+        MySingleton tmp = MySingleton.getInstance();
+        travels = tmp.travels;
 
         // Pass results to TravelAdapter Class
         adapter = new TravelAdapter(this, travels);
@@ -91,9 +94,35 @@ public class MyTravelsActivity extends AppCompatActivity implements AdapterView.
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
+            case R.id.action_share:
+                shareIntent(shareTravels());
+                Log.d(TAG, "onOptionsItemSelected()");
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void shareIntent(String Text) {
+        if(!Text.equals("")) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "subject here");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, Text);
+            startActivity(Intent.createChooser(shareIntent, "Share Via"));
+        } else {
+            Toast.makeText(this, "Nada para copartilhar", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private String shareTravels(){
+        String str = "";
+
+        for(Travel t: travels){
+            str += "\n" + t.toString() + "\n";
+        }
+
+        return str;
     }
 
 }

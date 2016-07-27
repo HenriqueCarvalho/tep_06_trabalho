@@ -13,15 +13,18 @@
         android:id="@+id/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="32dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Nova viagem"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:padding="0dp"
         android:gravity="center_vertical"
-        android:drawableLeft="@drawable/ic_action_share"
-        android:onClick="newTravelTextViewClicked" />
+        android:drawableLeft="@drawable/nova_viagem"
+        android:drawablePadding="@dimen/fab_size_mini"
+        android:scaleType="fitXY"
+        android:onClick="newTravelTextViewClicked"
+        android:textColor="@android:color/black"
+        android:textIsSelectable="false" />
 
     <TextView
         android:id="@+id/textView2"
@@ -32,8 +35,11 @@
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
-        android:drawableLeft="@drawable/ic_action_share"
-        android:onClick="newCostTextViewClicked" />
+        android:drawableLeft="@drawable/novo_gasto"
+        android:drawablePadding="@dimen/fab_size_mini"
+        android:onClick="newCostTextViewClicked"
+        android:textColor="@android:color/black"
+        android:textIsSelectable="false" />
 
     <TextView
         android:id="@+id/textView3"
@@ -44,6 +50,9 @@
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
         android:gravity="center_vertical"
-        android:drawableLeft="@drawable/ic_action_share"
-        android:onClick="myTravelsActivityTextViewClicked" />
+        android:drawableLeft="@drawable/minhas_viagens"
+        android:drawablePadding="@dimen/fab_size_mini"
+        android:onClick="myTravelsActivityTextViewClicked"
+        android:textColor="@android:color/black"
+        android:textIsSelectable="false" />
 </RelativeLayout>
